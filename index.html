@@ -74,6 +74,123 @@
       from{box-shadow:0 0 10px #ff0000;}
       to{box-shadow:0 0 25px #ff8c00;}
     }
+    
+    /* Ocean Skin */
+    body.skin-Ocean {
+      --bg1: #0A3D62; --bg2: #165E87; /* Deep Sea Blue */
+      --accent1: #6EBFB9; --accent2:#4AA49D; /* Seafoam/Turquoise */
+      --muted:#B0E0E6; /* Pale Blue */
+      --glass: rgba(255,255,255,0.1);
+      --site-shadow: 0 10px 40px rgba(10,61,98,0.7);
+      --cookie-color: linear-gradient(180deg, #FFD700, #FFA500); /* Shiny Gold Cookie */
+      --cookie-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      --tab-bg: #165E87;
+    }
+    .skin-Ocean #superCookie {
+      background: radial-gradient(circle, #87CEEB, #4682B4); /* Sky to Steel Blue */
+    }
+    
+    /* Gold Skin */
+    body.skin-Gold {
+      --bg1: #3D3D3A; --bg2: #5B5B58; /* Slate Gray */
+      --accent1: #FFD700; --accent2:#DAA520; /* Gold/Goldenrod */
+      --muted:#EEDD82; /* Light Gold */
+      --glass: rgba(255,215,0,0.1);
+      --site-shadow: 0 10px 40px rgba(255,215,0,0.3);
+      --cookie-color: linear-gradient(180deg,#DAA520, #B8860B); /* Darker Gold Cookie */
+      --cookie-shadow: 0 10px 30px rgba(255,215,0,0.5);
+      --tab-bg: #5B5B58;
+    }
+    .skin-Gold #superCookie {
+      background: radial-gradient(circle, #FFFFFF, #E0E0E0); /* Bright White/Silver */
+      box-shadow: 0 0 25px 8px rgba(255,255,255,0.5);
+    }
+    
+    /* Retro Skin */
+    body.skin-Retro {
+      --bg1: #1B263B; --bg2: #2B3A5A; /* Dark Navy/Primary */
+      --accent1: #FF69B4; --accent2:#FF1493; /* Hot Pink */
+      --muted:#00FFFF; /* Cyan/Teal */
+      --glass: rgba(255,105,180,0.1);
+      --site-shadow: 0 10px 40px rgba(0,0,0,0.8);
+      --cookie-color: linear-gradient(180deg,#FFD700, #FF6347); /* Yellow to Tomato Red */
+      --cookie-shadow: 0 10px 30px rgba(255,105,180,0.5);
+      --tab-bg: #2B3A5A;
+    }
+    .skin-Retro #superCookie {
+      background: radial-gradient(circle, #00FFFF, #008080); /* Teal Glow */
+      box-shadow: 0 0 25px 8px rgba(0,255,255,0.7);
+    }
+    
+    /* --- NEW: High Contrast Skin --- */
+    body.skin-Contrast {
+      --bg1: #000000; --bg2: #111111; /* Pure Black */
+      --accent1: #39FF14; --accent2:#00CC00; /* Neon Green */
+      --muted:#FFFFFF; /* White */
+      --glass: rgba(57, 255, 20, 0.08);
+      --site-shadow: 0 10px 40px rgba(57, 255, 20, 0.3);
+      --cookie-color: linear-gradient(180deg, #FFFFFF, #E0E0E0); /* White Cookie */
+      --cookie-shadow: 0 10px 30px rgba(57, 255, 20, 0.5);
+      --tab-bg: #111111;
+    }
+    .skin-Contrast #superCookie {
+      background: radial-gradient(circle, #FFFF00, #FF00FF); /* Yellow to Magenta */
+      box-shadow: 0 0 25px 8px rgba(255, 255, 0, 0.7);
+    }
+
+    /* --- NEW: Candy Skin --- */
+    body.skin-Candy {
+      --bg1: #F08080; --bg2: #FFB6C1; /* Light Coral to Pink */
+      --accent1: #40E0D0; --accent2:#00CED1; /* Turquoise */
+      --muted:#8A2BE2; /* BlueViolet */
+      --glass: rgba(255, 255, 255, 0.5);
+      --site-shadow: 0 10px 40px rgba(255, 182, 193, 0.8);
+      --cookie-color: linear-gradient(180deg, #FFA07A, #FF7F50); /* Salmon Cookie */
+      --cookie-shadow: 0 10px 30px rgba(255, 99, 71, 0.6);
+      --tab-bg: #FFB6C1;
+      color: #333; /* Change text color for light background */
+    }
+    body.skin-Candy h1, body.skin-Candy .tab-button.active, body.skin-Candy .section-title {
+      color: var(--muted);
+    }
+    body.skin-Candy .btn, body.skin-Candy .shop-item {
+      color: #333;
+      background: rgba(255,255,255,0.8);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    body.skin-Candy #superCookie {
+      background: radial-gradient(circle, #FF69B4, #FF1493); /* Pink Glow */
+    }
+
+    /* --- NEW: Space Skin --- */
+    body.skin-Space {
+      --bg1: #000033; --bg2: #191970; /* Deep Midnight Blue */
+      --accent1: #FFCC00; --accent2:#FF9933; /* Star Gold */
+      --muted:#A9A9A9; /* Dark Gray */
+      --glass: rgba(255, 255, 255, 0.05);
+      --site-shadow: 0 10px 40px rgba(0, 0, 51, 0.9);
+      --cookie-color: radial-gradient(circle, #FFFFFF, #B0C4DE); /* Planetary Grey */
+      --cookie-shadow: 0 10px 30px rgba(255, 204, 0, 0.6);
+      --tab-bg: #191970;
+    }
+    .skin-Space #superCookie {
+      background: radial-gradient(circle, #7FFFD4, #00FFFF); /* Aqua Glow */
+    }
+
+    /* --- NEW: Autumn Skin --- */
+    body.skin-Autumn {
+      --bg1: #4B0000; --bg2: #800000; /* Deep Maroon/Red */
+      --accent1: #FF8C00; --accent2:#FFA500; /* Dark Orange/Pumpkin */
+      --muted:#F5DEB3; /* Wheat */
+      --glass: rgba(255, 140, 0, 0.1);
+      --site-shadow: 0 10px 40px rgba(75, 0, 0, 0.9);
+      --cookie-color: linear-gradient(180deg, #CD853F, #A0522D); /* Chocolate Brown Cookie */
+      --cookie-shadow: 0 10px 30px rgba(255, 140, 0, 0.5);
+      --tab-bg: #800000;
+    }
+    .skin-Autumn #superCookie {
+      background: radial-gradient(circle, #FFD700, #FF4500); /* Gold to Red Glow */
+    }
 
     /* --- BASE STYLES --- */
     *{box-sizing:border-box}
@@ -85,7 +202,7 @@
       align-items:center; 
       justify-content:center; 
       padding:24px;
-      transition: background 0.5s ease;
+      transition: background 0.5s ease, color 0.5s ease;
     }
     .site{
       width:100%; 
@@ -94,22 +211,17 @@
       padding:18px;
       background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
       box-shadow:var(--site-shadow);
-      /* Changed to single column layout for easier handling of fixed bottom tab */
-      display:grid; 
       grid-template-columns: 1fr; 
       gap:18px; 
       align-items:start;
-      padding-bottom: 90px; /* Add space for the fixed tab bar */
+      padding-bottom: 90px;
     }
     header{grid-column:1/-1; display:flex; align-items:center; justify-content:space-between; gap:12px}
     .brand{display:flex; gap:12px; align-items:center}
     .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),var(--accent2)); display:flex; align-items:center; justify-content:center; font-size:28px; color:#000; font-weight:700; box-shadow:0 6px 18px rgba(255,160,40,0.08)}
     h1{margin:0;font-size:1.35rem;color:var(--accent1)}
     p.lead{margin:0;color:var(--muted)}
-    
-    /* LEFT section now takes full width */
     .left{padding:14px;background:var(--glass); border-radius:12px; min-height:420px; width: 100%;}
-    
     #cookieButton{
       width:220px;height:220px;border-radius:50%;border:none;
       background:var(--cookie-color);
@@ -132,28 +244,26 @@
     .cps{color:var(--muted);font-size:.95rem}
     .discount-timer{color:var(--accent2);font-weight:700;margin-top:6px;font-size:.95rem;}
     
-    /* RIGHT section (tabs container) is now fixed at the bottom */
     .right{
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
         max-width: 100vw;
-        height: 70px; /* Reduced height for a cleaner bar */
-        padding: 0; /* Remove padding */
+        height: 70px;
+        padding: 0;
         background: var(--tab-bg);
         box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
         border-radius: 0;
         z-index: 1000;
-        /* Hide content by default */
         display: flex;
         flex-direction: column;
+        transition: background 0.5s ease;
     }
 
-    /* Overlay container for shop/skins content */
     #tabOverlay {
         position: fixed;
-        bottom: 70px; /* Above the tab bar */
+        bottom: 70px;
         left: 0;
         right: 0;
         background: var(--tab-bg);
@@ -165,12 +275,12 @@
         display: none;
         z-index: 999;
         box-shadow: 0 -5px 20px rgba(0,0,0,0.4);
+        transition: background 0.5s ease;
     }
     #tabOverlay.active {
         display: block;
     }
 
-    /* Tab buttons are now in a dedicated bar */
     .tabs-container {
         display: flex;
         justify-content: space-around;
@@ -199,7 +309,6 @@
         border-bottom: 3px solid var(--accent1);
     }
     
-    /* Hide the tab content within the bar itself */
     .tab-content {
         display: none;
         padding-top: 10px;
@@ -218,7 +327,6 @@
     .btn{background:rgba(255,255,255,0.06);border-radius:8px;padding:8px 10px;cursor:pointer;border:none;color:#fff; transition: background 0.2s}
     .btn:hover {background:rgba(255,255,255,0.1)}
     
-    /* Skin Controls Styling */
     .skins-container { text-align: center; padding: 10px; }
     .skin-selector { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 12px; }
     .skin-btn {
@@ -243,12 +351,11 @@
 
     .section-title{font-size:.95rem;color:var(--accent1);margin:0 0 8px}
     
-    /* Adjustments for wider screens to keep the bottom bar centered with the game */
     @media (min-width: 1150px) {
         .right, #tabOverlay {
             left: 50%;
             transform: translateX(-50%);
-            max-width: 1148px; /* Match max-width of .site + padding */
+            max-width: 1148px;
         }
         .right {
             border-top-left-radius: 12px;
@@ -356,6 +463,13 @@
       { name: "Midnight", className: "skin-Midnight" },
       { name: "Forest", className: "skin-Forest" }, 
       { name: "Lava", className: "skin-Lava" },
+      { name: "Ocean", className: "skin-Ocean" },
+      { name: "Gold", className: "skin-Gold" },
+      { name: "Retro", className: "skin-Retro" },
+      { name: "High Contrast", className: "skin-Contrast" },
+      { name: "Candy", className: "skin-Candy" },
+      { name: "Space", className: "skin-Space" },
+      { name: "Autumn", className: "skin-Autumn" },
     ];
 
     function formatNumber(n){
@@ -372,7 +486,7 @@
         this.discountTimer = 0;
         this.items = ITEM_DEFINITIONS.map(d => ({...d, owned:0, cost:d.baseCost}));
         this.activeSkin = SKIN_DEFINITIONS[0];
-        this.activeTab = 'shop'; // Track the currently open tab
+        this.activeTab = 'shop';
 
         this.dom = {
           body: document.body,
@@ -399,7 +513,6 @@
         this.updateUI();
         this.startLoops();
         
-        // Initialize with shop tab open
         this.switchTab('shop'); 
       }
 
@@ -419,7 +532,7 @@
           if (tabName === 'close') {
               this.closeTab();
           } else if (this.activeTab === tabName && this.dom.tabOverlay.classList.contains('active')) {
-              this.closeTab(); // If clicking the active tab, close it
+              this.closeTab();
           } else {
               this.switchTab(tabName);
           }
@@ -428,15 +541,12 @@
       switchTab(tabName) {
         this.activeTab = tabName;
         
-        // 1. Update tab bar buttons
         this.dom.tabButtons.forEach(btn => btn.classList.remove('active'));
         document.querySelector(`.tab-button[data-tab="${tabName}"]`).classList.add('active');
         
-        // 2. Update overlay content
         this.dom.tabContents.forEach(content => content.classList.remove('active'));
         document.querySelector(`.tab-content[data-tab-content="${tabName}"]`).classList.add('active');
         
-        // 3. Show the overlay
         this.dom.tabOverlay.classList.add('active');
       }
       
