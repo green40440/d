@@ -192,7 +192,7 @@
       background: radial-gradient(circle, #FFD700, #FF4500); /* Gold to Red Glow */
     }
 
-    /* --- NEW: Vaporwave Skin --- */
+    /* Vaporwave Skin */
     body.skin-Vaporwave {
       --bg1: #2B0E4D; --bg2: #411B65; /* Deep Purple */
       --accent1: #FF00FF; --accent2:#00FFFF; /* Magenta/Cyan Neon */
@@ -208,7 +208,7 @@
       to{box-shadow:0 0 25px #00FFFF;}
     }
 
-    /* --- NEW: Jungle Skin --- */
+    /* Jungle Skin */
     body.skin-Jungle {
       --bg1: #004D40; --bg2: #00796B; /* Dark Teal/Green */
       --accent1: #FFEB3B; --accent2:#FBC02D; /* Bright Yellow/Banana */
@@ -220,7 +220,7 @@
       --tab-bg: #00796B;
     }
     
-    /* --- NEW: Monochrome Skin --- */
+    /* Monochrome Skin */
     body.skin-Monochrome {
       --bg1: #000000; --bg2: #333333; /* Black to Dark Gray */
       --accent1: #FFFFFF; --accent2:#DDDDDD; /* White */
@@ -235,7 +235,7 @@
       background: radial-gradient(circle, #FFFF00, #FF0000); /* Color Pop */
     }
 
-    /* --- NEW: Valentine Skin --- */
+    /* Valentine Skin */
     body.skin-Valentine {
       --bg1: #880000; --bg2: #CC0000; /* Deep Red */
       --accent1: #FFC0CB; --accent2:#FF69B4; /* Pink */
@@ -247,7 +247,7 @@
       --tab-bg: #CC0000;
     }
 
-    /* --- NEW: Ice Skin --- */
+    /* Ice Skin */
     body.skin-Ice {
       --bg1: #004466; --bg2: #3377AA; /* Dark to Light Blue */
       --accent1: #98FBFB; --accent2:#CCFFFF; /* Bright Cyan/Ice */
@@ -260,6 +260,75 @@
     }
     .skin-Ice #superCookie {
       background: radial-gradient(circle, #FFFFFF, #98FBFB); /* White/Cyan Glow */
+    }
+    
+    /* --- NEW: Laser Grid Skin (Cyberpunk Neon) --- */
+    body.skin-LaserGrid {
+      --bg1: #000000; --bg2: #0A001A; /* Black/Ultra Dark Purple */
+      --accent1: #FF33FF; --accent2:#33FFFF; /* Neon Pink & Cyan */
+      --muted:#39FF14; /* Neon Green */
+      --glass: rgba(51, 255, 255, 0.1);
+      --site-shadow: 0 10px 40px rgba(255, 51, 255, 0.7);
+      --cookie-color: linear-gradient(45deg, #FF33FF, #33FFFF); /* Bi-color Cookie */
+      --cookie-shadow: 0 10px 30px rgba(255, 51, 255, 0.8);
+      --tab-bg: #0A001A;
+    }
+    .skin-LaserGrid @keyframes glow{
+      from{box-shadow:0 0 10px #FF33FF;}
+      to{box-shadow:0 0 25px #33FFFF;}
+    }
+
+    /* --- NEW: Toxic Skin (Neon Green/Yellow) --- */
+    body.skin-Toxic {
+      --bg1: #101000; --bg2: #303000; /* Dark Yellow/Green */
+      --accent1: #CCFF00; --accent2:#99FF00; /* Lime Green */
+      --muted:#FF6600; /* Safety Orange */
+      --glass: rgba(204, 255, 0, 0.1);
+      --site-shadow: 0 10px 40px rgba(153, 255, 0, 0.6);
+      --cookie-color: radial-gradient(circle, #00FF00, #00CC00); /* Nuclear Green Cookie */
+      --cookie-shadow: 0 10px 30px rgba(0, 255, 0, 0.7);
+      --tab-bg: #303000;
+    }
+    .skin-Toxic #superCookie {
+      background: radial-gradient(circle, #FF00FF, #FF0000); /* Magenta/Red Pop */
+    }
+    .skin-Toxic @keyframes glow{
+      from{box-shadow:0 0 10px #CCFF00;}
+      to{box-shadow:0 0 25px #99FF00;}
+    }
+
+    /* --- NEW: Electric Skin (Neon Blue/Yellow) --- */
+    body.skin-Electric {
+      --bg1: #00002A; --bg2: #00004F; /* Deep Electric Blue */
+      --accent1: #FFFF33; --accent2:#FFCC00; /* Bright Yellow/Lightning */
+      --muted:#33CCFF; /* Electric Blue */
+      --glass: rgba(255, 255, 51, 0.1);
+      --site-shadow: 0 10px 40px rgba(255, 250, 50, 0.7);
+      --cookie-color: linear-gradient(180deg, #33CCFF, #0099FF); /* Blue Cookie */
+      --cookie-shadow: 0 10px 30px rgba(255, 250, 50, 0.6);
+      --tab-bg: #00004F;
+    }
+    .skin-Electric #superCookie {
+      background: radial-gradient(circle, #FFFFFF, #FFFF33); /* White/Yellow Glow */
+    }
+
+    /* --- NEW: Hacker Skin (Dark Green Matrix) --- */
+    body.skin-Hacker {
+      --bg1: #000000; --bg2: #001A00; /* Black/Matrix Dark Green */
+      --accent1: #00FF00; --accent2:#33FF33; /* Bright Green */
+      --muted:#00AA00; /* Darker Green */
+      --glass: rgba(0, 255, 0, 0.08);
+      --site-shadow: 0 10px 40px rgba(0, 255, 0, 0.5);
+      --cookie-color: linear-gradient(180deg, #FFFFFF, #DDDDDD); /* White/Code Cookie */
+      --cookie-shadow: 0 10px 30px rgba(0, 255, 0, 0.7);
+      --tab-bg: #001A00;
+    }
+    .skin-Hacker #superCookie {
+      background: radial-gradient(circle, #FF00FF, #FF0000); /* Pink/Red error glow */
+    }
+    .skin-Hacker @keyframes glow{
+      from{box-shadow:0 0 10px #00FF00;}
+      to{box-shadow:0 0 25px #33FF33;}
     }
 
     /* --- BASE STYLES --- */
@@ -545,6 +614,10 @@
       { name: "Monochrome", className: "skin-Monochrome" },
       { name: "Valentine", className: "skin-Valentine" },
       { name: "Ice", className: "skin-Ice" },
+      { name: "Laser Grid", className: "skin-LaserGrid" },
+      { name: "Toxic", className: "skin-Toxic" },
+      { name: "Electric", className: "skin-Electric" },
+      { name: "Hacker", className: "skin-Hacker" },
     ];
 
     function formatNumber(n){
