@@ -16,6 +16,7 @@
       --site-shadow: 0 10px 40px rgba(2,6,23,0.6);
       --cookie-color: linear-gradient(180deg,var(--accent1),var(--accent2));
       --cookie-shadow: 0 10px 30px rgba(0,0,0,0.45);
+      --tab-bg: #151a30; /* Background for the bottom tab bar */
     }
 
     /* Midnight Skin */
@@ -27,6 +28,7 @@
       --site-shadow: 0 10px 40px rgba(0,0,0,0.9);
       --cookie-color: linear-gradient(180deg,#e0e0e0,#b0b0b0); /* Silver/Grey cookie */
       --cookie-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      --tab-bg: #2d2d2d;
     }
     .skin-Midnight #superCookie {
       background: radial-gradient(circle, #00ffff, #0066ff); /* Blue/Cyan glow */
@@ -46,6 +48,7 @@
       --site-shadow: 0 10px 40px rgba(30,58,36,0.6);
       --cookie-color: linear-gradient(180deg,#E7CF9C, #C3A675); /* Graham Cracker Cookie */
       --cookie-shadow: 0 10px 30px rgba(30,58,36,0.8);
+      --tab-bg: #2B5433;
     }
     .skin-Forest #superCookie {
       background: radial-gradient(circle, #ff00ff, #ff9900); /* Keep default glow for contrast */
@@ -61,6 +64,7 @@
       --site-shadow: 0 10px 40px rgba(255,69,0,0.3);
       --cookie-color: linear-gradient(180deg,#303030,#101010); /* Obsidian/Burnt Cookie */
       --cookie-shadow: 0 10px 30px rgba(255,69,0,0.45);
+      --tab-bg: #380808;
     }
     .skin-Lava #superCookie {
       background: radial-gradient(circle, #ff0000, #ffff00); /* Red to Yellow Fire Glow */
@@ -76,21 +80,36 @@
     html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
     body{
       background: linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);
-      color:#fff; display:flex; align-items:center; justify-content:center; padding:24px;
+      color:#fff; 
+      display:flex; 
+      align-items:center; 
+      justify-content:center; 
+      padding:24px;
       transition: background 0.5s ease;
     }
     .site{
-      width:100%; max-width:1100px; border-radius:14px; padding:18px;
+      width:100%; 
+      max-width:1100px; 
+      border-radius:14px; 
+      padding:18px;
       background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
       box-shadow:var(--site-shadow);
-      display:grid; grid-template-columns: 420px 1fr; gap:18px; align-items:start;
+      /* Changed to single column layout for easier handling of fixed bottom tab */
+      display:grid; 
+      grid-template-columns: 1fr; 
+      gap:18px; 
+      align-items:start;
+      padding-bottom: 90px; /* Add space for the fixed tab bar */
     }
     header{grid-column:1/-1; display:flex; align-items:center; justify-content:space-between; gap:12px}
     .brand{display:flex; gap:12px; align-items:center}
     .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),var(--accent2)); display:flex; align-items:center; justify-content:center; font-size:28px; color:#000; font-weight:700; box-shadow:0 6px 18px rgba(255,160,40,0.08)}
     h1{margin:0;font-size:1.35rem;color:var(--accent1)}
     p.lead{margin:0;color:var(--muted)}
-    .left{padding:14px;background:var(--glass); border-radius:12px; min-height:420px}
+    
+    /* LEFT section now takes full width */
+    .left{padding:14px;background:var(--glass); border-radius:12px; min-height:420px; width: 100%;}
+    
     #cookieButton{
       width:220px;height:220px;border-radius:50%;border:none;
       background:var(--cookie-color);
@@ -113,14 +132,51 @@
     .cps{color:var(--muted);font-size:.95rem}
     .discount-timer{color:var(--accent2);font-weight:700;margin-top:6px;font-size:.95rem;}
     
-    .right{padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border-radius:12px; min-height:420px}
-    
-    /* --- TAB STYLES --- */
+    /* RIGHT section (tabs container) is now fixed at the bottom */
+    .right{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        max-width: 100vw;
+        height: 70px; /* Reduced height for a cleaner bar */
+        padding: 0; /* Remove padding */
+        background: var(--tab-bg);
+        box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+        border-radius: 0;
+        z-index: 1000;
+        /* Hide content by default */
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Overlay container for shop/skins content */
+    #tabOverlay {
+        position: fixed;
+        bottom: 70px; /* Above the tab bar */
+        left: 0;
+        right: 0;
+        background: var(--tab-bg);
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        padding: 15px;
+        max-height: 80vh;
+        overflow-y: auto;
+        display: none;
+        z-index: 999;
+        box-shadow: 0 -5px 20px rgba(0,0,0,0.4);
+    }
+    #tabOverlay.active {
+        display: block;
+    }
+
+    /* Tab buttons are now in a dedicated bar */
     .tabs-container {
         display: flex;
-        gap: 10px;
-        margin-bottom: 12px;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+        justify-content: space-around;
+        align-items: center;
+        height: 70px;
+        width: 100%;
     }
     .tab-button {
         background: transparent;
@@ -129,14 +185,21 @@
         color: var(--muted);
         cursor: pointer;
         font-weight: 600;
-        transition: color 0.2s;
+        transition: color 0.2s, border-bottom 0.2s;
         border-bottom: 3px solid transparent;
-        margin-bottom: -1px; /* Overlap border */
+        line-height: 1.2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        font-size: 0.85rem;
     }
     .tab-button.active {
         color: var(--accent1);
         border-bottom: 3px solid var(--accent1);
     }
+    
+    /* Hide the tab content within the bar itself */
     .tab-content {
         display: none;
         padding-top: 10px;
@@ -144,12 +207,12 @@
     .tab-content.active {
         display: block;
     }
-    /* --- END TAB STYLES --- */
-
+    
     .shop{display:flex;flex-direction:column;gap:10px}
     .shop-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;background:rgba(0,0,0,0.18);cursor:pointer;transition:transform .15s;}
     .shop-item:hover{transform:translateY(-3px)}
     .affordable{outline:2px solid rgba(255,255,255,0.06);box-shadow:0 6px 20px rgba(0,0,0,0.4)}
+    
     footer{grid-column:1/-1;text-align:center;color:var(--muted);font-size:.85rem;margin-top:6px}
     .controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px}
     .btn{background:rgba(255,255,255,0.06);border-radius:8px;padding:8px 10px;cursor:pointer;border:none;color:#fff; transition: background 0.2s}
@@ -179,6 +242,20 @@
     }
 
     .section-title{font-size:.95rem;color:var(--accent1);margin:0 0 8px}
+    
+    /* Adjustments for wider screens to keep the bottom bar centered with the game */
+    @media (min-width: 1150px) {
+        .right, #tabOverlay {
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 1148px; /* Match max-width of .site + padding */
+        }
+        .right {
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+    }
+    
     @media (max-width:960px){.site{grid-template-columns:1fr;}}
     @media (max-width:520px){#cookieButton{width:160px;height:160px;font-size:2.6rem}}
   </style>
@@ -220,29 +297,32 @@
       </div>
     </main>
 
-    <aside class="right">
-      
-      <div class="tabs-container">
-        <button class="tab-button active" data-tab="shop">🛒 Shop</button>
-        <button class="tab-button" data-tab="skins">🎨 Skins</button>
-      </div>
-      
+    <footer>By Flapy❤️❤️❤️ Flap Flap FLAPY is my youtube channel!                       speacial thanks to chat GPT for the idea</footer>
+  </div>
+  
+  <div id="tabOverlay">
       <div id="shopTab" class="tab-content active" data-tab-content="shop">
+        <h3 class="section-title">🛒 Shop</h3>
         <div id="shop" class="shop"></div>
       </div>
       
       <div id="skinsTab" class="tab-content" data-tab-content="skins">
         <div class="skins-container">
+          <h3 class="section-title">🎨 Skins</h3>
           <p style="color:var(--muted); margin-bottom: 15px;">Change the look of your bakery!</p>
           <div class="skin-selector" id="skinSelector">
             </div>
         </div>
       </div>
-      
-    </aside>
-
-    <footer>By Flapy❤️❤️❤️ Flap Flap FLAPY is my youtube channel!                       speacial thanks to chat GPT for the idea</footer>
   </div>
+
+  <aside class="right" id="tabBar">
+    <div class="tabs-container">
+        <button class="tab-button active" data-tab="shop">🛒 Shop</button>
+        <button class="tab-button" data-tab="skins">🎨 Skins</button>
+        <button class="tab-button" data-tab="close">❌ Close</button>
+    </div>
+  </aside>
 
   <script>
     const GAME_VERSION = '1.0';
@@ -292,6 +372,7 @@
         this.discountTimer = 0;
         this.items = ITEM_DEFINITIONS.map(d => ({...d, owned:0, cost:d.baseCost}));
         this.activeSkin = SKIN_DEFINITIONS[0];
+        this.activeTab = 'shop'; // Track the currently open tab
 
         this.dom = {
           body: document.body,
@@ -305,8 +386,10 @@
           loadBtn: document.getElementById('loadBtn'),
           resetBtn: document.getElementById('resetBtn'),
           skinSelector: document.getElementById('skinSelector'),
-          tabButtons: document.querySelectorAll('.tab-button'), // New
-          tabContents: document.querySelectorAll('.tab-content') // New
+          tabBar: document.getElementById('tabBar'),
+          tabOverlay: document.getElementById('tabOverlay'),
+          tabButtons: document.querySelectorAll('.tab-button'), 
+          tabContents: document.querySelectorAll('.tab-content')
         };
 
         this._loadSkin();
@@ -315,6 +398,9 @@
         this.buildSkinSelector();
         this.updateUI();
         this.startLoops();
+        
+        // Initialize with shop tab open
+        this.switchTab('shop'); 
       }
 
       _bindEvents(){
@@ -324,20 +410,41 @@
         this.dom.loadBtn.addEventListener('click', ()=> this.loadGame(true));
         this.dom.resetBtn.addEventListener('click', ()=> this.resetGame());
         
-        // New: Tab switching logic
         this.dom.tabButtons.forEach(button => {
-            button.addEventListener('click', (e) => this.switchTab(e.target.dataset.tab));
+            button.addEventListener('click', (e) => this.handleTabClick(e.target.dataset.tab));
         });
       }
       
+      handleTabClick(tabName) {
+          if (tabName === 'close') {
+              this.closeTab();
+          } else if (this.activeTab === tabName && this.dom.tabOverlay.classList.contains('active')) {
+              this.closeTab(); // If clicking the active tab, close it
+          } else {
+              this.switchTab(tabName);
+          }
+      }
+
       switchTab(tabName) {
-        // Deactivate all buttons and content
-        this.dom.tabButtons.forEach(btn => btn.classList.remove('active'));
-        this.dom.tabContents.forEach(content => content.classList.remove('active'));
+        this.activeTab = tabName;
         
-        // Activate the selected button and content
+        // 1. Update tab bar buttons
+        this.dom.tabButtons.forEach(btn => btn.classList.remove('active'));
         document.querySelector(`.tab-button[data-tab="${tabName}"]`).classList.add('active');
+        
+        // 2. Update overlay content
+        this.dom.tabContents.forEach(content => content.classList.remove('active'));
         document.querySelector(`.tab-content[data-tab-content="${tabName}"]`).classList.add('active');
+        
+        // 3. Show the overlay
+        this.dom.tabOverlay.classList.add('active');
+      }
+      
+      closeTab() {
+        this.activeTab = null;
+        this.dom.tabButtons.forEach(btn => btn.classList.remove('active'));
+        this.dom.tabOverlay.classList.remove('active');
+        this.dom.tabContents.forEach(content => content.classList.remove('active'));
       }
 
       get totalCPS(){
