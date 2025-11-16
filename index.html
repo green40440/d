@@ -122,7 +122,7 @@
       box-shadow: 0 0 25px 8px rgba(0,255,255,0.7);
     }
     
-    /* --- NEW: High Contrast Skin --- */
+    /* High Contrast Skin */
     body.skin-Contrast {
       --bg1: #000000; --bg2: #111111; /* Pure Black */
       --accent1: #39FF14; --accent2:#00CC00; /* Neon Green */
@@ -138,7 +138,7 @@
       box-shadow: 0 0 25px 8px rgba(255, 255, 0, 0.7);
     }
 
-    /* --- NEW: Candy Skin --- */
+    /* Candy Skin */
     body.skin-Candy {
       --bg1: #F08080; --bg2: #FFB6C1; /* Light Coral to Pink */
       --accent1: #40E0D0; --accent2:#00CED1; /* Turquoise */
@@ -162,7 +162,7 @@
       background: radial-gradient(circle, #FF69B4, #FF1493); /* Pink Glow */
     }
 
-    /* --- NEW: Space Skin --- */
+    /* Space Skin */
     body.skin-Space {
       --bg1: #000033; --bg2: #191970; /* Deep Midnight Blue */
       --accent1: #FFCC00; --accent2:#FF9933; /* Star Gold */
@@ -177,7 +177,7 @@
       background: radial-gradient(circle, #7FFFD4, #00FFFF); /* Aqua Glow */
     }
 
-    /* --- NEW: Autumn Skin --- */
+    /* Autumn Skin */
     body.skin-Autumn {
       --bg1: #4B0000; --bg2: #800000; /* Deep Maroon/Red */
       --accent1: #FF8C00; --accent2:#FFA500; /* Dark Orange/Pumpkin */
@@ -190,6 +190,76 @@
     }
     .skin-Autumn #superCookie {
       background: radial-gradient(circle, #FFD700, #FF4500); /* Gold to Red Glow */
+    }
+
+    /* --- NEW: Vaporwave Skin --- */
+    body.skin-Vaporwave {
+      --bg1: #2B0E4D; --bg2: #411B65; /* Deep Purple */
+      --accent1: #FF00FF; --accent2:#00FFFF; /* Magenta/Cyan Neon */
+      --muted:#F4B4B4; /* Light Pink */
+      --glass: rgba(255, 0, 255, 0.1);
+      --site-shadow: 0 10px 40px rgba(255, 0, 255, 0.6);
+      --cookie-color: linear-gradient(180deg, #00FFFF, #00DDDD); /* Cyan Cookie */
+      --cookie-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
+      --tab-bg: #411B65;
+    }
+    .skin-Vaporwave @keyframes glow{
+      from{box-shadow:0 0 10px #FF00FF;}
+      to{box-shadow:0 0 25px #00FFFF;}
+    }
+
+    /* --- NEW: Jungle Skin --- */
+    body.skin-Jungle {
+      --bg1: #004D40; --bg2: #00796B; /* Dark Teal/Green */
+      --accent1: #FFEB3B; --accent2:#FBC02D; /* Bright Yellow/Banana */
+      --muted:#A5D6A7; /* Light Green */
+      --glass: rgba(255, 255, 255, 0.08);
+      --site-shadow: 0 10px 40px rgba(0, 77, 64, 0.8);
+      --cookie-color: linear-gradient(180deg, #4CAF50, #388E3C); /* Deep Green Cookie */
+      --cookie-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      --tab-bg: #00796B;
+    }
+    
+    /* --- NEW: Monochrome Skin --- */
+    body.skin-Monochrome {
+      --bg1: #000000; --bg2: #333333; /* Black to Dark Gray */
+      --accent1: #FFFFFF; --accent2:#DDDDDD; /* White */
+      --muted:#888888; /* Mid Gray */
+      --glass: rgba(255, 255, 255, 0.05);
+      --site-shadow: 0 10px 40px rgba(255, 255, 255, 0.1);
+      --cookie-color: linear-gradient(180deg, #AAAAAA, #666666); /* Grey Cookie */
+      --cookie-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+      --tab-bg: #333333;
+    }
+    .skin-Monochrome #superCookie {
+      background: radial-gradient(circle, #FFFF00, #FF0000); /* Color Pop */
+    }
+
+    /* --- NEW: Valentine Skin --- */
+    body.skin-Valentine {
+      --bg1: #880000; --bg2: #CC0000; /* Deep Red */
+      --accent1: #FFC0CB; --accent2:#FF69B4; /* Pink */
+      --muted:#F0F0F0; /* Off-White */
+      --glass: rgba(255, 192, 203, 0.15);
+      --site-shadow: 0 10px 40px rgba(204, 0, 0, 0.8);
+      --cookie-color: radial-gradient(circle, #FFFFFF, #FFC0CB); /* Heart Cookie */
+      --cookie-shadow: 0 10px 30px rgba(255, 105, 180, 0.5);
+      --tab-bg: #CC0000;
+    }
+
+    /* --- NEW: Ice Skin --- */
+    body.skin-Ice {
+      --bg1: #004466; --bg2: #3377AA; /* Dark to Light Blue */
+      --accent1: #98FBFB; --accent2:#CCFFFF; /* Bright Cyan/Ice */
+      --muted:#E0FFFF; /* Azure */
+      --glass: rgba(204, 255, 255, 0.2);
+      --site-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      --cookie-color: linear-gradient(180deg, #FFFFFF, #ADD8E6); /* White/Light Blue Cookie */
+      --cookie-shadow: 0 10px 30px rgba(152, 251, 251, 0.8);
+      --tab-bg: #3377AA;
+    }
+    .skin-Ice #superCookie {
+      background: radial-gradient(circle, #FFFFFF, #98FBFB); /* White/Cyan Glow */
     }
 
     /* --- BASE STYLES --- */
@@ -470,6 +540,11 @@
       { name: "Candy", className: "skin-Candy" },
       { name: "Space", className: "skin-Space" },
       { name: "Autumn", className: "skin-Autumn" },
+      { name: "Vaporwave", className: "skin-Vaporwave" },
+      { name: "Jungle", className: "skin-Jungle" },
+      { name: "Monochrome", className: "skin-Monochrome" },
+      { name: "Valentine", className: "skin-Valentine" },
+      { name: "Ice", className: "skin-Ice" },
     ];
 
     function formatNumber(n){
