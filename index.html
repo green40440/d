@@ -28,7 +28,6 @@
       --cookie-color: linear-gradient(180deg,#e0e0e0,#b0b0b0); /* Silver/Grey cookie */
       --cookie-shadow: 0 10px 30px rgba(0,0,0,0.7);
     }
-    /* Super Cookie for Midnight Skin */
     .skin-Midnight #superCookie {
       background: radial-gradient(circle, #00ffff, #0066ff); /* Blue/Cyan glow */
       box-shadow: 0 0 25px 8px rgba(0,255,255,0.5);
@@ -36,6 +35,40 @@
     .skin-Midnight @keyframes glow {
       from{box-shadow:0 0 10px #00ffff;}
       to{box-shadow:0 0 25px #0066ff;}
+    }
+
+    /* Forest Skin */
+    body.skin-Forest {
+      --bg1: #1E3A24; --bg2: #2B5433; /* Deep Forest Green */
+      --accent1: #A4D46C; --accent2:#6CA443; /* Bright/Mossy Green */
+      --muted:#C8DBC5;
+      --glass: rgba(0,0,0,0.15);
+      --site-shadow: 0 10px 40px rgba(30,58,36,0.6);
+      --cookie-color: linear-gradient(180deg,#E7CF9C, #C3A675); /* Graham Cracker Cookie */
+      --cookie-shadow: 0 10px 30px rgba(30,58,36,0.8);
+    }
+    .skin-Forest #superCookie {
+      background: radial-gradient(circle, #ff00ff, #ff9900); /* Keep default glow for contrast */
+      box-shadow: 0 0 25px 8px rgba(255,0,255,0.5);
+    }
+
+    /* Lava Skin */
+    body.skin-Lava {
+      --bg1: #180505; --bg2: #380808; /* Dark Black/Red */
+      --accent1: #FF4500; --accent2:#FF8C00; /* Orange-Red/Deep Orange */
+      --muted:#ffc0cb; /* Light pink for contrast */
+      --glass: rgba(255, 69, 0, 0.1); /* Transparent Lava */
+      --site-shadow: 0 10px 40px rgba(255,69,0,0.3);
+      --cookie-color: linear-gradient(180deg,#303030,#101010); /* Obsidian/Burnt Cookie */
+      --cookie-shadow: 0 10px 30px rgba(255,69,0,0.45);
+    }
+    .skin-Lava #superCookie {
+      background: radial-gradient(circle, #ff0000, #ffff00); /* Red to Yellow Fire Glow */
+      box-shadow: 0 0 25px 8px rgba(255, 255, 0, 0.7);
+    }
+    .skin-Lava @keyframes glow {
+      from{box-shadow:0 0 10px #ff0000;}
+      to{box-shadow:0 0 25px #ff8c00;}
     }
 
     /* --- BASE STYLES --- */
@@ -103,11 +136,13 @@
       cursor: pointer;
       color: var(--muted);
       font-size: 0.9rem;
+      transition: all 0.2s;
     }
     .skin-btn.active {
       border-color: var(--accent1);
       color: var(--accent1);
       font-weight: bold;
+      transform: scale(1.05);
     }
 
     .section-title{font-size:.95rem;color:var(--accent1);margin:0 0 8px}
@@ -168,7 +203,7 @@
   <script>
     const GAME_VERSION = '1.0';
     const SAVE_KEY = 'cookiepuncher_save';
-    const SKIN_SAVE_KEY = 'cookiepuncher_skin'; // New key for saving skin
+    const SKIN_SAVE_KEY = 'cookiepuncher_skin'; // Key for saving the active skin
 
     const ITEM_DEFINITIONS = [
       { name: "Cursor", emoji: "🖱️", baseCost: 10, cps: 1, costGrow: 1.5 },
@@ -195,7 +230,8 @@
     const SKIN_DEFINITIONS = [
       { name: "Classic", className: "" },
       { name: "Midnight", className: "skin-Midnight" },
-      // Add more skins here (e.g., { name: "Forest", className: "skin-Forest" })
+      { name: "Forest", className: "skin-Forest" }, 
+      { name: "Lava", className: "skin-Lava" },
     ];
 
     function formatNumber(n){
@@ -214,7 +250,7 @@
         this.activeSkin = SKIN_DEFINITIONS[0]; // Default to Classic
 
         this.dom = {
-          body: document.body, // Added body element
+          body: document.body,
           cookieButton: document.getElementById('cookieButton'),
           superCookie: document.getElementById('superCookie'),
           scoreEl: document.getElementById('score'),
@@ -224,7 +260,7 @@
           saveBtn: document.getElementById('saveBtn'),
           loadBtn: document.getElementById('loadBtn'),
           resetBtn: document.getElementById('resetBtn'),
-          skinSelector: document.getElementById('skinSelector') // Added skin selector
+          skinSelector: document.getElementById('skinSelector')
         };
 
         this._loadSkin(); // Load skin before binding events and building shop
@@ -277,9 +313,11 @@
       }
 
       spawnSuperCookie(){
+        // Super cookie spawns every 30 to 60 seconds
         setTimeout(()=>{
           if(!this.discountActive){
             this.dom.superCookie.style.display='block';
+            // Super cookie disappears after 8 seconds if not clicked
             setTimeout(()=> this.dom.superCookie.style.display='none',8000);
           }
           this.spawnSuperCookie();
@@ -316,7 +354,8 @@
       
       changeSkin(skin) {
         // 1. Update the body class
-        this.dom.body.classList.remove(...SKIN_DEFINITIONS.map(s => s.className).filter(c => c)); // Remove all skin classes
+        // Remove all defined skin classes
+        this.dom.body.classList.remove(...SKIN_DEFINITIONS.map(s => s.className).filter(c => c)); 
         if (skin.className) {
           this.dom.body.classList.add(skin.className);
         }
@@ -331,7 +370,7 @@
           }
         });
         
-        this.updateUI(); // Re-render affordable check if needed
+        this.updateUI();
       }
 
       saveSkin() {
@@ -340,6 +379,7 @@
 
       _loadSkin() {
         const savedSkinName = localStorage.getItem(SKIN_SAVE_KEY);
+        // Find the skin object, default to Classic if not found
         const skin = SKIN_DEFINITIONS.find(s => s.name === savedSkinName) || SKIN_DEFINITIONS[0];
         this.activeSkin = skin;
         if (skin.className) {
@@ -364,6 +404,7 @@
       }
 
       startLoops(){
+        // CPS tick
         setInterval(()=>{
           this.cookies += this.totalCPS;
           this.updateUI();
@@ -391,13 +432,13 @@
           if(this.items[i]){ this.items[i].owned=d.owned; this.items[i].cost=d.cost; }
         });
         this._loadSkin(); // Load the skin
-        this.buildSkinSelector(); // Rebuild skin selector to set 'active' class
+        this.buildSkinSelector(); // Rebuild skin selector to set 'active' class correctly
         this.updateUI();
         if(show) alert('Game loaded!');
       }
 
       resetGame(){
-        if(confirm('Reset everything?')){
+        if(confirm('Reset everything, including your cookies and upgrades?')){
           localStorage.removeItem(SAVE_KEY);
           localStorage.removeItem(SKIN_SAVE_KEY); // Reset skin as well
           location.reload();
