@@ -77,7 +77,7 @@
     body{
       background: linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);
       color:#fff; display:flex; align-items:center; justify-content:center; padding:24px;
-      transition: background 0.5s ease; /* Smooth skin transition */
+      transition: background 0.5s ease;
     }
     .site{
       width:100%; max-width:1100px; border-radius:14px; padding:18px;
@@ -91,8 +91,6 @@
     h1{margin:0;font-size:1.35rem;color:var(--accent1)}
     p.lead{margin:0;color:var(--muted)}
     .left{padding:14px;background:var(--glass); border-radius:12px; min-height:420px}
-    
-    /* Cookie Button uses the dynamic cookie-color variable */
     #cookieButton{
       width:220px;height:220px;border-radius:50%;border:none;
       background:var(--cookie-color);
@@ -103,7 +101,6 @@
     #cookieButton:active{transform:scale(.92)}
     #superCookie{
       display:none;width:120px;height:120px;border-radius:50%;border:none;
-      /* Default Super Cookie Colors */
       background:radial-gradient(circle, #ff00ff, #ff9900);
       font-size:2.4rem;cursor:pointer;
       box-shadow:0 0 25px 8px rgba(255,0,255,0.5);
@@ -115,7 +112,40 @@
     .stats .big{font-size:1.25rem;margin-top:8px}
     .cps{color:var(--muted);font-size:.95rem}
     .discount-timer{color:var(--accent2);font-weight:700;margin-top:6px;font-size:.95rem;}
+    
     .right{padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border-radius:12px; min-height:420px}
+    
+    /* --- TAB STYLES --- */
+    .tabs-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 12px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .tab-button {
+        background: transparent;
+        border: none;
+        padding: 8px 15px;
+        color: var(--muted);
+        cursor: pointer;
+        font-weight: 600;
+        transition: color 0.2s;
+        border-bottom: 3px solid transparent;
+        margin-bottom: -1px; /* Overlap border */
+    }
+    .tab-button.active {
+        color: var(--accent1);
+        border-bottom: 3px solid var(--accent1);
+    }
+    .tab-content {
+        display: none;
+        padding-top: 10px;
+    }
+    .tab-content.active {
+        display: block;
+    }
+    /* --- END TAB STYLES --- */
+
     .shop{display:flex;flex-direction:column;gap:10px}
     .shop-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;background:rgba(0,0,0,0.18);cursor:pointer;transition:transform .15s;}
     .shop-item:hover{transform:translateY(-3px)}
@@ -126,10 +156,10 @@
     .btn:hover {background:rgba(255,255,255,0.1)}
     
     /* Skin Controls Styling */
-    .skins-container { margin-top: 14px; text-align: center; }
-    .skin-selector { display: flex; justify-content: center; gap: 8px; margin-top: 8px; }
+    .skins-container { text-align: center; padding: 10px; }
+    .skin-selector { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 12px; }
     .skin-btn {
-      padding: 6px 12px;
+      padding: 8px 15px;
       border: 2px solid transparent;
       background: var(--glass);
       border-radius: 6px;
@@ -137,6 +167,9 @@
       color: var(--muted);
       font-size: 0.9rem;
       transition: all 0.2s;
+    }
+    .skin-btn:hover {
+        border-color: rgba(255,255,255,0.2);
     }
     .skin-btn.active {
       border-color: var(--accent1);
@@ -181,11 +214,6 @@
         </div>
       </div>
       
-      <div class="skins-container">
-        <h3 class="section-title">🎨 Skins</h3>
-        <div class="skin-selector" id="skinSelector">
-          </div>
-      </div>
       <div style="margin-top:14px">
         <h3 class="section-title">How to play</h3>
         <p style="margin:6px 0;color:var(--muted)">Click the cookie to get cookies. Buy items in the shop to increase cookies per second (CPS). Watch out for the Super Cookie — it gives 50% off for 30 seconds!</p>
@@ -193,8 +221,24 @@
     </main>
 
     <aside class="right">
-      <h3 class="section-title">🛒 Shop</h3>
-      <div id="shop" class="shop"></div>
+      
+      <div class="tabs-container">
+        <button class="tab-button active" data-tab="shop">🛒 Shop</button>
+        <button class="tab-button" data-tab="skins">🎨 Skins</button>
+      </div>
+      
+      <div id="shopTab" class="tab-content active" data-tab-content="shop">
+        <div id="shop" class="shop"></div>
+      </div>
+      
+      <div id="skinsTab" class="tab-content" data-tab-content="skins">
+        <div class="skins-container">
+          <p style="color:var(--muted); margin-bottom: 15px;">Change the look of your bakery!</p>
+          <div class="skin-selector" id="skinSelector">
+            </div>
+        </div>
+      </div>
+      
     </aside>
 
     <footer>By Flapy❤️❤️❤️ Flap Flap FLAPY is my youtube channel!                       speacial thanks to chat GPT for the idea</footer>
@@ -203,7 +247,7 @@
   <script>
     const GAME_VERSION = '1.0';
     const SAVE_KEY = 'cookiepuncher_save';
-    const SKIN_SAVE_KEY = 'cookiepuncher_skin'; // Key for saving the active skin
+    const SKIN_SAVE_KEY = 'cookiepuncher_skin';
 
     const ITEM_DEFINITIONS = [
       { name: "Cursor", emoji: "🖱️", baseCost: 10, cps: 1, costGrow: 1.5 },
@@ -247,7 +291,7 @@
         this.discountActive = false;
         this.discountTimer = 0;
         this.items = ITEM_DEFINITIONS.map(d => ({...d, owned:0, cost:d.baseCost}));
-        this.activeSkin = SKIN_DEFINITIONS[0]; // Default to Classic
+        this.activeSkin = SKIN_DEFINITIONS[0];
 
         this.dom = {
           body: document.body,
@@ -260,13 +304,15 @@
           saveBtn: document.getElementById('saveBtn'),
           loadBtn: document.getElementById('loadBtn'),
           resetBtn: document.getElementById('resetBtn'),
-          skinSelector: document.getElementById('skinSelector')
+          skinSelector: document.getElementById('skinSelector'),
+          tabButtons: document.querySelectorAll('.tab-button'), // New
+          tabContents: document.querySelectorAll('.tab-content') // New
         };
 
-        this._loadSkin(); // Load skin before binding events and building shop
+        this._loadSkin();
         this._bindEvents();
         this.buildShop();
-        this.buildSkinSelector(); // Build skin selector buttons
+        this.buildSkinSelector();
         this.updateUI();
         this.startLoops();
       }
@@ -277,6 +323,21 @@
         this.dom.saveBtn.addEventListener('click', ()=> this.saveGame(true));
         this.dom.loadBtn.addEventListener('click', ()=> this.loadGame(true));
         this.dom.resetBtn.addEventListener('click', ()=> this.resetGame());
+        
+        // New: Tab switching logic
+        this.dom.tabButtons.forEach(button => {
+            button.addEventListener('click', (e) => this.switchTab(e.target.dataset.tab));
+        });
+      }
+      
+      switchTab(tabName) {
+        // Deactivate all buttons and content
+        this.dom.tabButtons.forEach(btn => btn.classList.remove('active'));
+        this.dom.tabContents.forEach(content => content.classList.remove('active'));
+        
+        // Activate the selected button and content
+        document.querySelector(`.tab-button[data-tab="${tabName}"]`).classList.add('active');
+        document.querySelector(`.tab-content[data-tab-content="${tabName}"]`).classList.add('active');
       }
 
       get totalCPS(){
@@ -313,11 +374,9 @@
       }
 
       spawnSuperCookie(){
-        // Super cookie spawns every 30 to 60 seconds
         setTimeout(()=>{
           if(!this.discountActive){
             this.dom.superCookie.style.display='block';
-            // Super cookie disappears after 8 seconds if not clicked
             setTimeout(()=> this.dom.superCookie.style.display='none',8000);
           }
           this.spawnSuperCookie();
@@ -336,8 +395,6 @@
         });
       }
       
-      // --- Skin Logic ---
-      
       buildSkinSelector() {
         this.dom.skinSelector.innerHTML = '';
         SKIN_DEFINITIONS.forEach(skin => {
@@ -353,14 +410,11 @@
       }
       
       changeSkin(skin) {
-        // 1. Update the body class
-        // Remove all defined skin classes
         this.dom.body.classList.remove(...SKIN_DEFINITIONS.map(s => s.className).filter(c => c)); 
         if (skin.className) {
           this.dom.body.classList.add(skin.className);
         }
         
-        // 2. Update the active skin state and selector buttons
         this.activeSkin = skin;
         this.saveSkin();
         this.dom.skinSelector.querySelectorAll('.skin-btn').forEach(btn => {
@@ -379,15 +433,12 @@
 
       _loadSkin() {
         const savedSkinName = localStorage.getItem(SKIN_SAVE_KEY);
-        // Find the skin object, default to Classic if not found
         const skin = SKIN_DEFINITIONS.find(s => s.name === savedSkinName) || SKIN_DEFINITIONS[0];
         this.activeSkin = skin;
         if (skin.className) {
           this.dom.body.classList.add(skin.className);
         }
       }
-      
-      // --- End Skin Logic ---
 
       updateUI(){
         this.dom.scoreEl.textContent = `Cookies: ${formatNumber(this.cookies)}`;
@@ -404,7 +455,6 @@
       }
 
       startLoops(){
-        // CPS tick
         setInterval(()=>{
           this.cookies += this.totalCPS;
           this.updateUI();
@@ -419,7 +469,7 @@
           items:this.items.map(i=>({owned:i.owned,cost:i.cost}))
         };
         localStorage.setItem(SAVE_KEY,JSON.stringify(save));
-        this.saveSkin(); // Also save the skin
+        this.saveSkin();
         if(show) alert('Game saved!');
       }
 
@@ -431,8 +481,8 @@
         s.items.forEach((d,i)=>{
           if(this.items[i]){ this.items[i].owned=d.owned; this.items[i].cost=d.cost; }
         });
-        this._loadSkin(); // Load the skin
-        this.buildSkinSelector(); // Rebuild skin selector to set 'active' class correctly
+        this._loadSkin();
+        this.buildSkinSelector();
         this.updateUI();
         if(show) alert('Game loaded!');
       }
@@ -440,7 +490,7 @@
       resetGame(){
         if(confirm('Reset everything, including your cookies and upgrades?')){
           localStorage.removeItem(SAVE_KEY);
-          localStorage.removeItem(SKIN_SAVE_KEY); // Reset skin as well
+          localStorage.removeItem(SKIN_SAVE_KEY);
           location.reload();
         }
       }
