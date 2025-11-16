@@ -331,7 +331,7 @@
       to{box-shadow:0 0 25px #33FF33;}
     }
     
-    /* Firestorm Skin (Red/Orange/Yellow Neon) */
+    /* --- NEW: Firestorm Skin (Red/Orange/Yellow Neon) --- */
     body.skin-Firestorm {
       --bg1: #1A0000; --bg2: #330000; /* Darkest Red */
       --accent1: #FF4500; --accent2:#FFEA00; /* Orange-Red to Neon Yellow */
@@ -347,7 +347,7 @@
       to{box-shadow:0 0 25px #FF4500;}
     }
 
-    /* Deep Pink Skin (Pink/Purple) */
+    /* --- NEW: Deep Pink Skin (Pink/Purple) --- */
     body.skin-DeepPink {
       --bg1: #100020; --bg2: #25004A; /* Deep Blue-Purple */
       --accent1: #FF1493; --accent2:#EA00FF; /* Deep Pink to Bright Violet */
@@ -363,7 +363,7 @@
       to{box-shadow:0 0 25px #FF1493;}
     }
 
-    /* Sub Zero Skin (Cool Blue/Cyan) */
+    /* --- NEW: Sub Zero Skin (Cool Blue/Cyan) --- */
     body.skin-SubZero {
       --bg1: #001A33; --bg2: #003366; /* Deep Blue */
       --accent1: #0FF0FC; --accent2:#7FFFD4; /* Neon Cyan to Aqua */
@@ -379,7 +379,7 @@
       to{box-shadow:0 0 25px #7FFFD4;}
     }
 
-    /* Glitch Skin (R/G/B Separation Effect) */
+    /* --- NEW: Glitch Skin (R/G/B Separation Effect) --- */
     body.skin-Glitch {
       --bg1: #000000; --bg2: #000000; /* Pure Black */
       --accent1: #FF00FF; --accent2:#00FFFF; /* Magenta/Cyan */
@@ -395,7 +395,7 @@
       to{box-shadow:0 0 25px #00FFFF;}
     }
 
-    /* Toxic Waste Skin (High Contrast Green/Orange) */
+    /* --- NEW: Toxic Waste Skin (High Contrast Green/Orange) --- */
     body.skin-ToxicWaste {
       --bg1: #000D00; --bg2: #002500; /* Ultra Dark Green */
       --accent1: #CCFF00; --accent2:#FF8C00; /* Lime Green/Dark Orange */
@@ -407,22 +407,6 @@
       --tab-bg: #002500;
     }
     .skin-ToxicWaste @keyframes glow{
-      from{box-shadow:0 0 10px #FF8C00;}
-      to{box-shadow:0 0 25px #CCFF00;}
-    }
-
-    /* --- PLACEHOLDER FOR NEW SKINS (They inherit from ToxicWaste for a strong neon default) --- */
-    body[class^="skin-Neon"] {
-      --bg1: #000D00; --bg2: #002500; /* Ultra Dark Green */
-      --accent1: #CCFF00; --accent2:#FF8C00; /* Lime Green/Dark Orange */
-      --muted:#FFFFFF; /* White */
-      --glass: rgba(204, 255, 0, 0.15);
-      --site-shadow: 0 10px 40px rgba(204, 255, 0, 0.8);
-      --cookie-color: radial-gradient(circle, #39FF14, #00AA00); /* Pure Toxic Green Cookie */
-      --cookie-shadow: 0 10px 30px rgba(255, 140, 0, 0.7); /* Orange Shadow */
-      --tab-bg: #002500;
-    }
-    body[class^="skin-Neon"] @keyframes glow{
       from{box-shadow:0 0 10px #FF8C00;}
       to{box-shadow:0 0 25px #CCFF00;}
     }
@@ -609,7 +593,7 @@
         <div class="logo">🍪</div>
         <div>
           <h1>Cookie Puncher</h1>
-          <p class="lead">Punch cookies, buy upgrades, and build a cookie empire.</p>
+          <p class="lead">Punch cookies, buy upgrades, become a bakery legend.</p>
         </div>
       </div>
       <div style="text-align:right">
@@ -651,7 +635,7 @@
       <div id="skinsTab" class="tab-content" data-tab-content="skins">
         <div class="skins-container">
           <h3 class="section-title">🎨 Skins</h3>
-          <p style="color:var(--muted); margin-bottom: 15px;">Change the look of your bakery! (Total: 125 Skins)</p>
+          <p style="color:var(--muted); margin-bottom: 15px;">Change the look of your bakery! (Total: 25 Skins)</p>
           <div class="skin-selector" id="skinSelector">
             </div>
         </div>
@@ -720,20 +704,6 @@
       { name: "Glitch", className: "skin-Glitch" },
       { name: "Toxic Waste", className: "skin-ToxicWaste" },
     ];
-    
-    // --- GENERATE 100 NEW SKINS ---
-    const BASE_COUNT = 25;
-    const NUM_NEW_SKINS = 100;
-
-    for (let i = 1; i <= NUM_NEW_SKINS; i++) {
-        const newIndex = BASE_COUNT + i;
-        SKIN_DEFINITIONS.push({
-            name: `Neon ${newIndex}`,
-            // Placeholder class name. The CSS placeholder selector [class^="skin-Neon"] will style them.
-            className: `skin-Neon${newIndex}` 
-        });
-    }
-    // --- END OF NEW SKINS GENERATION ---
 
     function formatNumber(n){
       if(n >= 1e9) return (n/1e9).toFixed(2)+'B';
@@ -890,7 +860,6 @@
       }
       
       changeSkin(skin) {
-        // Remove all skin classes before adding the new one
         this.dom.body.classList.remove(...SKIN_DEFINITIONS.map(s => s.className).filter(c => c)); 
         if (skin.className) {
           this.dom.body.classList.add(skin.className);
